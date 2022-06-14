@@ -9,17 +9,44 @@ function App() {
 	const [tempInfo, setTempInfo] = useState("");
 	const getWeatherInfo = async () => {
 		try {
-			let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=cfe5fbf9f63f5bb13c544b436ab0e641`;
+			// let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=cfe5fbf9f63f5bb13c544b436ab0e641`;
+			let url = `https://api.weatherapi.com/v1/current.json?key=9083e95bcb8d49ddb4a50057221406&q=${searchValue}&aqi=yes`;
 			const res = await fetch(url);
 			const data = await res.json();
 
-			const { temp, humidity, temp_min, temp_max, feels_like } = data.main;
-			const { main: weathermood, description, icon } = data.weather[0];
-			const { country, sunrise, sunset } = data.sys;
-			const { name, timezone } = data;
-			const { speed } = data.wind;
+			// const { temp, humidity, temp_min, temp_max, feels_like } = data.main;
+			// const { main: weathermood, description, icon } = data.weather[0];
+			// const { country, sunrise, sunset } = data.sys;
+			// const { name, timezone } = data;
+			// const { speed } = data.wind;
 
-			const myNewWeatherInfo = { temp, humidity, temp_min, temp_max, country, sunrise, sunset, name, timezone, weathermood, speed, description, feels_like, icon };
+			const { name, region, country, localtime } = data.location;
+			const { last_updated, temp_c, wind_kph, humidity, feelslike_c, uv } =
+				data.current;
+			const { text, icon } = data.current.condition;
+
+			const localtimedata = localtime;
+			const localtimeSlice = localtimedata.substr(localtimedata.length - 5);
+			const tConvert = (time)=>{
+				// Check correct time format and split into components
+				time = time
+				.toString()
+				.match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+				if (time.length > 1) {
+				// If time format correct
+				time = time.slice(1); // Remove full string match value
+				time[5] = +time[0] < 12 ? " AM" : " PM"; // Set AM/PM
+				time[0] = +time[0] % 12 || 12; // Adjust hours
+				}
+				return time.join(""); // return adjusted time or original string
+			}
+			const getlocaltimedata = tConvert(localtimeSlice);
+			
+			
+
+			// const myNewWeatherInfo = { temp, humidity, temp_min, temp_max, country, sunrise, sunset, name, timezone, weathermood, speed, description, feels_like, icon };
+			const myNewWeatherInfo = { name, region, country, localtime, last_updated, temp_c, wind_kph, humidity, feelslike_c, uv, icon, text, localtimeSlice, getlocaltimedata, };
 			setTempInfo(myNewWeatherInfo);
 		} catch (error) {
 			console.log(error);
