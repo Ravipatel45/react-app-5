@@ -43,7 +43,7 @@ const Weathercard = ({ tempInfo }) => {
 				<div className="card__weather">
 					{/* <i className="wi wi-night-sleet text-indigo-700"></i> */}
 					<img src={weatherImgUrl} alt="icon" />
-					<p className="card__weather__temp">{temp} C</p>
+					<p className="card__weather__temp">{temp}<sup>°</sup>C</p>
 				</div>
 			</div>
 
