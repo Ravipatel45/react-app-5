@@ -47,7 +47,7 @@ const Weathercard = ({ tempInfo }) => {
 				</div>
 			</div>
 
-			<div className="flex flex-wrap mx-auto w-full max-w-2xl">
+			<div className="flex flex-wrap mx-auto mb-10 w-full max-w-2xl">
 				<div className="p-2 sm:w-1/2 w-full">
 					<div className="bg-gray-100 rounded flex p-4 h-full items-center">
 						<i className="wi wi-sunrise text-indigo-700 mr-3"></i>

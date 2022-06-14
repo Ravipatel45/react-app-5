@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "./App.css";
+import Map from "./component/map";
 import Weathercard from "./component/weathercard";
 
 function App() {
@@ -18,22 +19,7 @@ function App() {
 			const { name, timezone } = data;
 			const { speed } = data.wind;
 
-			const myNewWeatherInfo = {
-				temp,
-				humidity,
-				temp_min,
-				temp_max,
-				country,
-				sunrise,
-				sunset,
-				name,
-				timezone,
-				weathermood,
-				speed,
-				description,
-				feels_like,
-				icon
-			};
+			const myNewWeatherInfo = { temp, humidity, temp_min, temp_max, country, sunrise, sunset, name, timezone, weathermood, speed, description, feels_like, icon };
 			setTempInfo(myNewWeatherInfo);
 		} catch (error) {
 			console.log(error);
@@ -45,6 +31,7 @@ function App() {
 
 	return (
 		<>
+			<Map />
 			<div className="mb-6 flex mt-4">
 				<input
 					type="search"
@@ -53,7 +40,7 @@ function App() {
 					placeholder="Search"
 					autoComplete="false"
 					value={searchValue}
-					className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out rounded-lg rounded-tr-none rounded-br-none"
+					className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out rounded-lg rounded-tr-none rounded-br-none capitalize"
 					onChange={(e) => setSearchValue(e.target.value)}
 				/>
 				<button
