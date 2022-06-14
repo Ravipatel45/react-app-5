@@ -13,7 +13,7 @@ function App() {
 			const data = await res.json();
 
 			const { temp, humidity, temp_min, temp_max, feels_like } = data.main;
-			const { main: weathermood } = data.weather[0];
+			const { main: weathermood, description, icon } = data.weather[0];
 			const { country, sunrise, sunset } = data.sys;
 			const { name, timezone } = data;
 			const { speed } = data.wind;
@@ -30,7 +30,9 @@ function App() {
 				timezone,
 				weathermood,
 				speed,
-        feels_like,
+				description,
+				feels_like,
+				icon
 			};
 			setTempInfo(myNewWeatherInfo);
 		} catch (error) {

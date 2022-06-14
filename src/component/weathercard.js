@@ -1,30 +1,9 @@
 import React from "react";
 
 const Weathercard = ({ tempInfo }) => {
-	const { temp, humidity, temp_min, temp_max, country, sunrise, sunset, name, timezone, weathermood, speed, feels_like } = tempInfo;
-	const month = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
-	];
-	const weekday = [
-		"Sunday",
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-	];
+	const { temp, humidity, temp_min, temp_max, country, sunrise, sunset, name, timezone, weathermood, speed, feels_like, description, icon } = tempInfo;
+	const month = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", ];
+	const weekday = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", ];
 
 	const d = new Date();
 	let localeTime = d.toLocaleTimeString([], {
@@ -47,6 +26,7 @@ const Weathercard = ({ tempInfo }) => {
 		hour: "2-digit",
 		minute: "2-digit",
 	});
+	let weatherImgUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`
 
 	return (
 		<>
@@ -61,7 +41,8 @@ const Weathercard = ({ tempInfo }) => {
 					</p>
 				</div>
 				<div className="card__weather">
-					<i className="wi wi-night-sleet text-indigo-700"></i>
+					{/* <i className="wi wi-night-sleet text-indigo-700"></i> */}
+					<img src={weatherImgUrl} alt="icon" />
 					<p className="card__weather__temp">{temp} C</p>
 				</div>
 			</div>
@@ -87,7 +68,7 @@ const Weathercard = ({ tempInfo }) => {
 					<div className="bg-gray-100 rounded flex p-4 h-full items-center">
 						<i className="wi wi-night-sleet text-indigo-700 mr-3"></i>
 						<span className="title-font font-medium">
-                        Weathermood : <span className="font-bold">{weathermood}</span>
+							Weathermood : <span className="font-bold">{weathermood}</span>, <span className="text-xs font-normal">{description}</span>
 						</span>
 					</div>
 				</div>
@@ -102,14 +83,17 @@ const Weathercard = ({ tempInfo }) => {
 				<div className="p-2 sm:w-1/2 w-full">
 					<div className="bg-gray-100 rounded flex p-4 h-full items-center">
 						<i className="wi wi-humidity text-indigo-700 mr-3"></i>
-						<span className="title-font font-medium">Humidity : <span className="font-bold">{humidity}%</span></span>
+						<span className="title-font font-medium">
+							Humidity : <span className="font-bold">{humidity}%</span>
+						</span>
 					</div>
 				</div>
 				<div className="p-2 sm:w-1/2 w-full">
 					<div className="bg-gray-100 rounded flex p-4 h-full items-center">
 						<i className="wi wi-cloud-refresh text-indigo-700 mr-3"></i>
 						<span className="title-font font-medium">
-                        temperature feels : <span className="font-bold">{feels_like}</span>
+							temperature feels :{" "}
+							<span className="font-bold">{feels_like}</span>
 						</span>
 					</div>
 				</div>
@@ -125,7 +109,7 @@ const Weathercard = ({ tempInfo }) => {
 					<div className="bg-gray-100 rounded flex p-4 h-full items-center">
 						<i className="wi wi-day-cloudy-high text-indigo-700 mr-3"></i>
 						<span className="title-font font-medium">
-                        Max temperature : <span className="font-bold">{temp_max}</span>
+							Max temperature : <span className="font-bold">{temp_max}</span>
 						</span>
 					</div>
 				</div>
